@@ -1,0 +1,88 @@
+﻿
+@model IEnumerable<Project.Models.Transaction>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Your History...</h2>
+
+
+
+<table class="table">
+    <tr>
+        <th>
+            UserName
+        </th>
+        <th>
+            ProductName
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Quantity)
+        </th>
+        @if ((string)TempData.Peek("role") == "admin")
+        {
+        <th>
+            CostPrice
+        </th>
+        <th>
+            SellPrice
+        </th>
+        }
+        else
+        {
+            <th>
+                @Html.DisplayNameFor(model => model.Price)
+            </th>
+        }
+        <th>
+            @Html.DisplayNameFor(model => model.Date)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Retailer.Name)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ProductList.Name)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Quantity)
+        </td>
+        @if ((string)TempData.Peek("role") == "admin")
+        {
+            <td>
+                @Html.DisplayFor(modelItem => item.ProductList.CostPrice)
+            </td>
+        }
+        <td>
+            @Html.DisplayFor(modelItem => item.Price)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Date)
+        </td>
+        
+        
+        <td>
+            @Html.ActionLink("Details", "Details", new { id=item.TransactionId }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.TransactionId })
+        </td>
+    </tr>
+}
+
+</table>
+
+<p>
+    @if ((string)TempData.Peek("role") == "admin")
+    {
+        @Html.ActionLink("Back to List", "Index", "ProductLists")
+    }
+    else
+    {
+        @Html.ActionLink("Back to List", "Main", "ProductLists")
+    }
+</p>
+

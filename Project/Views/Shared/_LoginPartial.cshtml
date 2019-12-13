@@ -1,0 +1,24 @@
+﻿@if (TempData.ContainsKey("isLoggedIn"))
+{
+
+    using (Html.BeginForm("Logoff", "Retailers", FormMethod.Post, new { id = "logoutForm", @class = "navbar-right" }))
+    {
+    @Html.AntiForgeryToken()
+
+    <ul class="nav navbar-nav navbar-right">
+        <li>@Html.ActionLink("History", "History", "Transactions")</li>  |
+
+        <li>
+            @Html.ActionLink("Hello " + TempData.Peek("name") + "!", "Prof", "Retailers")
+        </li>
+        <li><a href="javascript:document.getElementById('logoutForm').submit()">LogOut</a></li>
+    </ul>
+    }
+}
+else
+{
+    <ul class="nav navbar-nav navbar-right">
+        <li>@Html.ActionLink("Register", "Register", "Retailers", routeValues: null, htmlAttributes: new { id = "registerLink" })</li>
+        <li>@Html.ActionLink("Log in", "Login", "Retailers", routeValues: null, htmlAttributes: new { id = "loginLink" })</li>
+    </ul>
+}

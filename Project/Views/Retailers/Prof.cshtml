@@ -1,0 +1,56 @@
+﻿@model Project.Models.Retailer
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Profile Page</h2>
+
+<div>
+    <h4>Your Profile</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Name)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Email)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Email)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Contact)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Contact)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Address)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Address)
+        </dd>
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit") |
+    @if ((string)TempData.Peek("role") == "admin")
+    {
+        @Html.ActionLink("Back to List", "Index", "ProductLists")
+    }
+    else
+    {
+        @Html.ActionLink("Back to List", "Main", "ProductLists")
+    }
+</p>
